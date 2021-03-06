@@ -1,0 +1,5 @@
+-- CREATE TABLE department (
+--     department_id INT AUTO_INCREMENT NOT NULL,
+--     name VARCHAR(30),
+--     PRIMARY KEY (department_id)
+-- )
