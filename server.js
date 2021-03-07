@@ -16,6 +16,8 @@ connection.connect(function(err){
     if (err) throw err;
     console.log("connected to " + connection.threadId);
     showEmployee();
+    showDepartment();
+    showRole();
     connection.end();
 });
 
@@ -24,8 +26,20 @@ function showEmployee(){
     connection.query(sql, function(err, res){
         if (err) throw err;
         console.table(res);
-        res.forEach(field => {
-            console.table(field.name);
-        })
     });
-}
+};
+
+function showDepartment(){
+    let sql = "SELECT * FROM department";
+    connection.query(sql, function(err, res){
+        if (err) throw err;
+        console.table(res);
+    });
+};
+function showRole(){
+    let sql = "SELECT * FROM role";
+    connection.query(sql, function(err, res){
+        if (err) throw err;
+        console.table(res);
+    });
+};
