@@ -15,9 +15,10 @@ var connection = mysql.createConnection({
 connection.connect(function(err){
     if (err) throw err;
     console.log("connected to " + connection.threadId);
-    showEmployee();
-    showDepartment();
-    showRole();
+    // showEmployee();
+    // showDepartment();
+    // showRole();
+    showRoster();
     connection.end();
 });
 
@@ -38,6 +39,15 @@ function showDepartment(){
 };
 function showRole(){
     let sql = "SELECT * FROM role";
+    connection.query(sql, function(err, res){
+        if (err) throw err;
+        console.table(res);
+    });
+};
+
+function showRoster(){
+    //Name then Role then department
+    let sql = "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name, role.salary, employee.manager_id  FROM employee INNER JOIN role ON role.role_id = employee.role_id INNER JOIN department ON role.department_id = department.department_id ORDER BY employee.id";
     connection.query(sql, function(err, res){
         if (err) throw err;
         console.table(res);
