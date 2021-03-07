@@ -1,4 +1,5 @@
 var mysql = require("mysql");
+const cTable = require('console.table');
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -22,9 +23,9 @@ function showEmployee(){
     let sql = "SELECT * FROM employee";
     connection.query(sql, function(err, res){
         if (err) throw err;
-        console.log(res);
+        console.table(res);
         res.forEach(field => {
-            console.log(field.name);
+            console.table(field.name);
         })
     });
 }
