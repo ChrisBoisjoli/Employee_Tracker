@@ -1,7 +1,26 @@
 const inquirer = require("inquirer");
+    //Build a command-line application that at a minimum allows the user to:
 
-    //Please Build your Team
-    //Setting prompts to dry up code
+    // Add departments, roles, employees
+    //add department
+    //add role
+    //add employee
+
+    // View departments, roles, employees
+    //view all departments 
+    //view all roles
+    //view all employees
+    
+    // Update employee roles  
+
+    //what would you like to do?
+    //view all employees
+    //add employee
+    //add role
+    //add department
+    //view all departments
+    //view all role
+    //update employee role
 const questions = [
     {
         type: "input",
