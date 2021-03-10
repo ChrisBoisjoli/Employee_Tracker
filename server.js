@@ -3,17 +3,15 @@ const cTable = require('console.table');
 require('dotenv').config();
 
 var connection = mysql.createConnection(
-    // process.env.DB_NAME,
-    // process.env.DB_USER,
-    // process.env.DB_PASSWORD, 
+    
     {
     host: "localhost",
     dialect: 'mysql',
     port: 3306,   
     
-        user: "root",
-        database: "employee_trackerDB",
-        password: "",
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
 });
 
 connection.connect(function(err){
