@@ -16,18 +16,17 @@ const inquirer = require("inquirer");
     //what would you like to do?
     //view all employees
     //add employee
-    //add role
     //add department
     //view all departments
-    //view all role
-    //update employee role
+   
+    
 const questions = [
     {
         type: "list",
         message: "What would you like to do?",
         name: "choices",
         choices: ["view all employees", "add employee", "add role", "add department","view all departments", "view all roles", "update employee role"],
-        default: "ex: Manager",
+        default: "ex: view all employees",
     },
     // {
     //     type: "input",
