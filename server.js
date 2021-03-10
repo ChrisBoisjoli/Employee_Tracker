@@ -5,11 +5,12 @@ require('dotenv').config();
 var connection = mysql.createConnection(
     // process.env.DB_NAME,
     // process.env.DB_USER,
-    // process.env.DB_PASSWORD,
+    // process.env.DB_PASSWORD, 
     {
     host: "localhost",
-
-    port: 3306,    
+    dialect: 'mysql',
+    port: 3306,   
+    
         user: "root",
         database: "employee_trackerDB",
         password: "",
