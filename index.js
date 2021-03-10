@@ -1,5 +1,4 @@
 const inquirer = require('inquirer');
-
 const questions = require("./questions");
 
 function init(){

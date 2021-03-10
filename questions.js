@@ -25,7 +25,7 @@ const questions = [
         type: "list",
         message: "What would you like to do?",
         name: "choices",
-        choices: ["view all employees", "add employee", "add role", "add department","view all departments", "view all roles", "update employee role"],
+        choices: ["view all employees", "add employee", "add role", "add department","view all departments", "view all roles", "update employee role", "exit"],
         default: "ex: view all employees",
     },
     // {
