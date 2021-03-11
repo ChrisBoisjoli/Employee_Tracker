@@ -57,7 +57,7 @@ inquirer
   else if (answer.choices === 'update employee role'){
       updateRole();
   }
-  else if (answer.choices === 'exit'){console.log("connection ended")
+  else if (answer.choices === 'exit'){console.log("Updates Complete!")
   connection.end();}
     else {
     connection.end();
@@ -238,7 +238,7 @@ const updateRole = () => {
                     chosenName = name;
                 }
             });
-            
+           if (chosenName.id === employee.id ){}
             connection.query(
                 'UPDATE employee SET ? WHERE ?',
                 {
