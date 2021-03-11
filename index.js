@@ -47,7 +47,9 @@ inquirer
   else if (answer.choices === 'view all departments'){
     showDepartment();
   }
-  else if (answer.choices === 'view all roles'){}
+  else if (answer.choices === 'view all roles'){
+    showRole();
+  }
   else if (answer.choices === 'update employee role'){}
   else if (answer.choices === 'exit'){console.log("connection ended")
   connection.end();}
@@ -72,6 +74,14 @@ function showRoster(){
 
 function showDepartment(){
     let sql = "SELECT * FROM department";
+    connection.query(sql, function(err, res){
+        if (err) throw err;
+        console.table(res);
+    });
+    start();
+};
+function showRole(){
+    let sql = "SELECT * FROM role";
     connection.query(sql, function(err, res){
         if (err) throw err;
         console.table(res);
