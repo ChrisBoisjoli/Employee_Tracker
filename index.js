@@ -42,7 +42,9 @@ inquirer
   else if (answer.choices === 'add employee'){
 
   }
-  else if (answer.choices === 'add role'){}
+  else if (answer.choices === 'add role'){
+    addRole();
+  }
   else if (answer.choices === 'add department'){}
   else if (answer.choices === 'view all departments'){
     showDepartment();
@@ -89,6 +91,47 @@ function showRole(){
     start();
 };
 
+const addRole = () =>{
+inquirer
+.prompt([
+    {
+        name:'title',
+        type:'input',
+        message: 'What is the name of the role?',
+    },
+    {
+        name:'salary',
+        type:'input',
+        message: 'What is the roles salary?',
+    },
+    {
+        name:'department_id',
+        type:'input',
+        message: 'What is the department ID?',
+        validate(value) {
+            if (isNaN(value) === false) {
+              return true;
+            }
+            return false;
+          },
+    },
+])
+.then((answer) => {
+connection.query(
+    'INSERT INTO role SET ?',
+    {
+        title: answer.title,
+        salary: answer.salary,
+        department_id: answer.department_id || 0,
+    },
+    (err) =>{
+        if (err) throw err,
+        console.log('Your role was added');
+        start();
+    }
+);
+});
+};
 connection.connect((err) => {
     if (err) throw err;
     // run the start function after the connection is made to prompt the user
