@@ -203,7 +203,7 @@ const addEmployee = () =>{
         });
         };
 const updateRole = () => {
-    connection.query('SELECT * FROM employee', (err, results) => {
+    connection.query('SELECT id, first_name FROM employee', (err, results) => {
         if (err) throw err;
         inquirer
         .prompt([
@@ -212,7 +212,7 @@ const updateRole = () => {
                 type: 'rawlist',
                 choices(){
                     const choiceArray = [];
-                    results.forEach(( { first_name}) => {
+                    results.forEach(( {first_name}) => {
                         choiceArray.push(first_name);
                     });
                     return choiceArray;
