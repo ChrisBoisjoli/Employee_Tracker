@@ -20,7 +20,6 @@ connection.connect(function(err){
     // showEmployee();
     // showDepartment();
     // showRole();
-    showRoster();
     connection.end();
 });
 
