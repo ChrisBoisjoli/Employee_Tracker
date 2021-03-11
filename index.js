@@ -38,7 +38,15 @@ inquirer
   // based on their answer, either call the bid or the post functions
   if (answer.choices === 'view all employees') {
     showRoster();
-  } else {
+  } 
+  else if (answer.choices === 'add employee'){}
+  else if (answer.choices === 'add role'){}
+  else if (answer.choices === 'add department'){}
+  else if (answer.choices === 'view all departments'){}
+  else if (answer.choices === 'view all roles'){}
+  else if (answer.choices === 'update employee role'){}
+  else if (answer.choices === 'exit'){}
+    else {
     connection.end();
   }
 });
