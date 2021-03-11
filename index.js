@@ -45,7 +45,9 @@ inquirer
   else if (answer.choices === 'add role'){
     addRole();
   }
-  else if (answer.choices === 'add department'){}
+  else if (answer.choices === 'add department'){
+    addDepartment();
+  }
   else if (answer.choices === 'view all departments'){
     showDepartment();
   }
@@ -168,12 +170,36 @@ const addEmployee = () =>{
         },
         (err) =>{
             if (err) throw err,
-            console.log('Your role was added');
+            console.log('Your employee was added');
             start();
         }
     );
     });
     };
+
+    const addDepartment = () =>{
+        inquirer
+        .prompt([
+            {
+                name:'name',
+                type:'input',
+                message: 'What is the Department name?',
+            },    
+        ])
+        .then((answer) => {
+        connection.query(
+            'INSERT INTO department SET ?',
+            {
+                name: answer.name,
+            },
+            (err) =>{
+                if (err) throw err,
+                console.log('Your department was added');
+                start();
+            }
+        );
+        });
+        };
 
 
 
