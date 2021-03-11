@@ -54,7 +54,9 @@ inquirer
   else if (answer.choices === 'view all roles'){
     showRole();
   }
-  else if (answer.choices === 'update employee role'){}
+  else if (answer.choices === 'update employee role'){
+      updateRole();
+  }
   else if (answer.choices === 'exit'){console.log("connection ended")
   connection.end();}
     else {
@@ -200,7 +202,61 @@ const addEmployee = () =>{
         );
         });
         };
-
+const updateRole = () => {
+    connection.query('SELECT * FROM employee', (err, results) => {
+        if (err) throw err;
+        inquirer
+        .prompt([
+            {
+                name: 'choice',
+                type: 'rawlist',
+                choices(){
+                    const choiceArray = [];
+                    results.forEach(( { first_name}) => {
+                        choiceArray.push(first_name);
+                    });
+                    return choiceArray;
+                },
+                message: 'Which employee role do you want to update?',
+            },
+            {
+                name:'role_id',
+                type:'input',
+                message: 'What is the role ID?',
+                validate(value) {
+                    if (isNaN(value) === false) {
+                      return true;
+                    }
+                    return false;
+                  },
+            }
+        ])
+        .then((answer) => {
+            let chosenName;
+            results.forEach((name) => {
+                if (name.first_name === answer.choice){
+                    chosenName = name;
+                }
+            });
+            
+            connection.query(
+                'UPDATE employee SET ? WHERE ?',
+                {
+                    role_id: answer.role_id || 0,
+                    
+                },
+                {
+                    id: chosenName.id,
+                },
+                (err) => {
+                    if (err) throw err;
+                    console.log("role was updated");
+                    start();
+                },
+            )
+        });
+    })
+}
 
 
 connection.connect((err) => {
