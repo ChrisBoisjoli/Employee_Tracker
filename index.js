@@ -40,7 +40,7 @@ inquirer
     showRoster();
   } 
   else if (answer.choices === 'add employee'){
-
+    addEmployee();
   }
   else if (answer.choices === 'add role'){
     addRole();
@@ -97,7 +97,7 @@ inquirer
     {
         name:'title',
         type:'input',
-        message: 'What is the name of the role?',
+        message: 'What is the title of the role?',
     },
     {
         name:'salary',
@@ -132,6 +132,51 @@ connection.query(
 );
 });
 };
+
+const addEmployee = () =>{
+    inquirer
+    .prompt([
+        {
+            name:'first_name',
+            type:'input',
+            message: 'What is the first name?',
+        },
+        {
+            name:'last_name',
+            type:'input',
+            message: 'What is the last name?',
+        },
+        {
+            name:'role_id',
+            type:'input',
+            message: 'What is the role ID?',
+            validate(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              },
+        },
+    ])
+    .then((answer) => {
+    connection.query(
+        'INSERT INTO employee SET ?',
+        {
+            first_name: answer.first_name,
+            last_name: answer.last_name,
+            role_id: answer.role_id || 0,
+        },
+        (err) =>{
+            if (err) throw err,
+            console.log('Your role was added');
+            start();
+        }
+    );
+    });
+    };
+
+
+
 connection.connect((err) => {
     if (err) throw err;
     // run the start function after the connection is made to prompt the user
