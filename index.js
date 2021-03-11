@@ -39,13 +39,18 @@ inquirer
   if (answer.choices === 'view all employees') {
     showRoster();
   } 
-  else if (answer.choices === 'add employee'){}
+  else if (answer.choices === 'add employee'){
+
+  }
   else if (answer.choices === 'add role'){}
   else if (answer.choices === 'add department'){}
-  else if (answer.choices === 'view all departments'){}
+  else if (answer.choices === 'view all departments'){
+      viewDepartments();
+  }
   else if (answer.choices === 'view all roles'){}
   else if (answer.choices === 'update employee role'){}
-  else if (answer.choices === 'exit'){}
+  else if (answer.choices === 'exit'){console.log("connection ended")
+  connection.end();}
     else {
     connection.end();
   }
@@ -60,7 +65,9 @@ function showRoster(){
     connection.query(sql, function(err, res){
         if (err) throw err;
         console.table(res);
+    
     });
+    start();
 };
 
 connection.connect((err) => {
