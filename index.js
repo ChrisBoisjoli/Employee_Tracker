@@ -203,7 +203,7 @@ const addEmployee = () =>{
         });
         };
 const updateRole = () => {
-    connection.query('SELECT id, first_name FROM employee', (err, results) => {
+    connection.query('SELECT id, first_name FROM employee', (err, employeeTableRes) => {
         if (err) throw err;
         inquirer
         .prompt([
@@ -212,7 +212,7 @@ const updateRole = () => {
                 type: 'rawlist',
                 choices(){
                     const choiceArray = [];
-                    results.forEach(( {first_name}) => {
+                    employeeTableRes.forEach(( {first_name}) => {
                         choiceArray.push(first_name);
                     });
                     return choiceArray;
@@ -231,30 +231,38 @@ const updateRole = () => {
                   },
             }
         ])
-        .then((answer) => {
-            let chosenName;
-            results.forEach((name) => {
-                if (name.first_name === answer.choice){
-                    chosenName = name;
+        .then((roleIdAnswer) => {
+            let employeeIdChoice;
+            employeeTableRes.forEach((name) => {
+
+                if (name.first_name === roleIdAnswer.choice){
+                    let employeeNameChoice = name.first_name;
+                     employeeIdChoice = name.id;
+
+                    console.log("Chosen Employee", name);
+
                 }
             });
-           if (chosenName.id === employee.id ){}
+
             connection.query(
                 'UPDATE employee SET ? WHERE ?',
-                {
-                    role_id: answer.role_id || 0,
+                [{
+                    role_id: roleIdAnswer.role_id || 0,
                     
                 },
                 {
-                    id: chosenName.id,
-                },
+                    id: employeeIdChoice,
+                }
+            ],
                 (err) => {
                     if (err) throw err;
                     console.log("role was updated");
                     start();
                 },
             )
-        });
+        }).catch(function(err){
+            console.log(err);
+        })
     })
 }
 
