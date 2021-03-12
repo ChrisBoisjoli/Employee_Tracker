@@ -239,7 +239,7 @@ const updateRole = () => {
                     let employeeNameChoice = name.first_name;
                      employeeIdChoice = name.id;
 
-                    console.log("Chosen Employee", name);
+                    // console.log("Chosen Employee", name);
 
                 }
             });
